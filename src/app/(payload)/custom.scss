@@ -1,0 +1,47 @@
+// Admin UI custom styles
+label.field-label,
+input,
+textarea,
+.collection-list {
+  font-size: 14px;
+}
+label.field-label {
+  font-weight: 500;
+}
+.nav-group,
+.dashboard__group {
+  margin-bottom: 40px;
+}
+.nav__link {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.nav__link.active,
+.nav__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.nav__link.active {
+  font-weight: 700;
+}
+.nav {
+  background-color: whitesmoke;
+}
+.cell-title {
+  font-weight: 500;
+}
+.nav-group__label {
+  text-transform: uppercase;
+  color: var(--theme-elevation-600);
+}
+.upload-field-card--size-medium .thumbnail {
+  width: 80px;
+  height: 80px;
+}
+.field-description {
+  color: var(--theme-elevation-600);
+}
+.lexical-block {
+  margin: 18px 0;
+}

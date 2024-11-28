@@ -16,7 +16,7 @@ export const Articles: CollectionConfig = {
   slug: "articles",
   admin: {
     useAsTitle: "title",
-    group: "Page Collections",
+    group: "Pages",
   },
   fields: [
     {

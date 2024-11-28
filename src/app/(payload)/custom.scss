@@ -12,12 +12,15 @@ label.field-label {
 .dashboard__group {
   margin-bottom: 40px;
 }
-.nav__link {
+.card__title {
+  font-size: 14px;
+}
+.nav__link,
+.nav-group__label {
   font-size: 14px;
   font-weight: 500;
-  line-height: 1.6;
+  line-height: 2;
 }
-.nav__link.active,
 .nav__link:hover {
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -32,8 +35,11 @@ label.field-label {
   font-weight: 500;
 }
 .nav-group__label {
-  text-transform: uppercase;
   color: var(--theme-elevation-600);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 12px;
 }
 .upload-field-card--size-medium .thumbnail {
   width: 80px;
@@ -44,4 +50,15 @@ label.field-label {
 }
 .lexical-block {
   margin: 18px 0;
+}
+.nav-group__content {
+  padding-left: 20px;
+}
+.nav__link-indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--theme-elevation-600);
+  display: inline-block;
+  margin-right: 8px;
 }

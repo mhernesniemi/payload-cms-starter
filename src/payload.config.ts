@@ -10,6 +10,9 @@ import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Articles } from "./collections/Articles";
+import { CollectionPage } from "./collections/CollectionPage";
+import { News } from "./collections/News";
+import { Reference } from "./collections/Reference";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,7 +26,7 @@ export default buildConfig({
     theme: "light",
     dateFormat: "dd.MM.yyyy",
   },
-  collections: [Users, Media, Articles],
+  collections: [Users, Media, Articles, CollectionPage, News, Reference],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

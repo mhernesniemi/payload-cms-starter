@@ -13,6 +13,10 @@ import { Articles } from "./collections/Articles";
 import { CollectionPage } from "./collections/CollectionPage";
 import { News } from "./collections/News";
 import { Reference } from "./collections/Reference";
+import { FrontPage } from "./globals/FrontPage";
+import { MainMenu } from "./globals/MainMenu";
+import { Categories } from "./collections/Categories";
+import { Contacts } from "./collections/Contacts";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -26,7 +30,8 @@ export default buildConfig({
     theme: "light",
     dateFormat: "dd.MM.yyyy",
   },
-  collections: [Users, Media, Articles, CollectionPage, News, Reference],
+  collections: [Users, Media, Articles, CollectionPage, News, Reference, Categories, Contacts],
+  globals: [FrontPage, MainMenu],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

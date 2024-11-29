@@ -1,5 +1,5 @@
 import { Field } from "payload";
-import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { HeadingFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import { BlocksFeature } from "@payloadcms/richtext-lexical";
 import {
   mediaBlock,
@@ -39,6 +39,7 @@ export const collectionPageFields: Field[] = [
       features: ({ defaultFeatures }) => {
         return [
           ...defaultFeatures,
+          HeadingFeature({ enabledHeadingSizes: ["h2", "h3"] }),
           BlocksFeature({
             blocks: [
               mediaBlock,

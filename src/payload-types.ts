@@ -17,6 +17,8 @@ export interface Config {
     'collection-pages': CollectionPage;
     news: News;
     references: Reference;
+    categories: Category;
+    contacts: Contact;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -29,6 +31,8 @@ export interface Config {
     'collection-pages': CollectionPagesSelect<false> | CollectionPagesSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     references: ReferencesSelect<false> | ReferencesSelect<true>;
+    categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    contacts: ContactsSelect<false> | ContactsSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -36,8 +40,14 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'front-page': FrontPage;
+    'main-menu': MainMenu;
+  };
+  globalsSelect: {
+    'front-page': FrontPageSelect<false> | FrontPageSelect<true>;
+    'main-menu': MainMenuSelect<false> | MainMenuSelect<true>;
+  };
   locale: 'fi' | 'en';
   user: User & {
     collection: 'users';
@@ -109,97 +119,6 @@ export interface Media {
 export interface Article {
   id: string;
   title: string;
-  showFeaturedContent?: boolean | null;
-  featuredContent?:
-    | (
-        | {
-            media: string | Media;
-            caption?: string | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'media';
-          }
-        | {
-            posts: {
-              title: string;
-              text?: string | null;
-              link?: string | null;
-              image: string | Media;
-              buttonText?: string | null;
-              video?: string | null;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'largeFeaturePost';
-            }[];
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'largeFeaturePostsWrapper';
-          }
-        | {
-            posts: {
-              title: string;
-              text?: string | null;
-              link?: string | null;
-              image: string | Media;
-              id?: string | null;
-              blockName?: string | null;
-              blockType: 'smallFeaturePost';
-            }[];
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'smallFeaturePostsWrapper';
-          }
-        | {
-            title: string;
-            text?: string | null;
-            buttonText: string;
-            link: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'callToAction';
-          }
-        | {
-            title: string;
-            text?: string | null;
-            buttonText: string;
-            url: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'investorsInfo';
-          }
-        | {
-            links?:
-              | {
-                  title: string;
-                  isExternal?: boolean | null;
-                  internalUrl?: {
-                    relationTo: 'articles';
-                    value: string | Article;
-                  } | null;
-                  externalUrl?: string | null;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'linkList';
-          }
-        | {
-            contacts: (string | User)[];
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'contactPeople';
-          }
-        | {
-            title: string;
-            description?: string | null;
-            youtubeId: string;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'videoEmbed';
-          }
-      )[]
-    | null;
   content: {
     root: {
       type: string;
@@ -308,6 +227,34 @@ export interface Reference {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories".
+ */
+export interface Category {
+  id: string;
+  label: string;
+  slug: string;
+  parent?: (string | null) | Category;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts".
+ */
+export interface Contact {
+  id: string;
+  name: string;
+  title?: string | null;
+  email: string;
+  phone?: string | null;
+  image?: (string | null) | Media;
+  categories?: (string | Category)[] | null;
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -336,6 +283,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'references';
         value: string | Reference;
+      } | null)
+    | ({
+        relationTo: 'categories';
+        value: string | Category;
+      } | null)
+    | ({
+        relationTo: 'contacts';
+        value: string | Contact;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -419,112 +374,6 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
-  showFeaturedContent?: T;
-  featuredContent?:
-    | T
-    | {
-        media?:
-          | T
-          | {
-              media?: T;
-              caption?: T;
-              id?: T;
-              blockName?: T;
-            };
-        largeFeaturePostsWrapper?:
-          | T
-          | {
-              posts?:
-                | T
-                | {
-                    largeFeaturePost?:
-                      | T
-                      | {
-                          title?: T;
-                          text?: T;
-                          link?: T;
-                          image?: T;
-                          buttonText?: T;
-                          video?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        smallFeaturePostsWrapper?:
-          | T
-          | {
-              posts?:
-                | T
-                | {
-                    smallFeaturePost?:
-                      | T
-                      | {
-                          title?: T;
-                          text?: T;
-                          link?: T;
-                          image?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        callToAction?:
-          | T
-          | {
-              title?: T;
-              text?: T;
-              buttonText?: T;
-              link?: T;
-              id?: T;
-              blockName?: T;
-            };
-        investorsInfo?:
-          | T
-          | {
-              title?: T;
-              text?: T;
-              buttonText?: T;
-              url?: T;
-              id?: T;
-              blockName?: T;
-            };
-        linkList?:
-          | T
-          | {
-              links?:
-                | T
-                | {
-                    title?: T;
-                    isExternal?: T;
-                    internalUrl?: T;
-                    externalUrl?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-        contactPeople?:
-          | T
-          | {
-              contacts?: T;
-              id?: T;
-              blockName?: T;
-            };
-        videoEmbed?:
-          | T
-          | {
-              title?: T;
-              description?: T;
-              youtubeId?: T;
-              id?: T;
-              blockName?: T;
-            };
-      };
   content?: T;
   featuredImage?: T;
   author?: T;
@@ -574,6 +423,32 @@ export interface ReferencesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "categories_select".
+ */
+export interface CategoriesSelect<T extends boolean = true> {
+  label?: T;
+  slug?: T;
+  parent?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts_select".
+ */
+export interface ContactsSelect<T extends boolean = true> {
+  name?: T;
+  title?: T;
+  email?: T;
+  phone?: T;
+  image?: T;
+  categories?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
@@ -603,6 +478,315 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "front-page".
+ */
+export interface FrontPage {
+  id: string;
+  content: (
+    | {
+        title: string;
+        text?: string | null;
+        buttonText: string;
+        link: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'callToAction';
+      }
+    | {
+        title: string;
+        text?: string | null;
+        buttonText: string;
+        url: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'investorsInfo';
+      }
+    | {
+        posts: {
+          title: string;
+          text?: string | null;
+          link?: string | null;
+          image: string | Media;
+          buttonText?: string | null;
+          video?: string | null;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'largeFeaturePost';
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'largeFeaturePostsWrapper';
+      }
+    | {
+        posts: {
+          title: string;
+          text?: string | null;
+          link?: string | null;
+          image: string | Media;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'smallFeaturePost';
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'smallFeaturePostsWrapper';
+      }
+    | {
+        links?:
+          | {
+              title: string;
+              isExternal?: boolean | null;
+              internalUrl?: {
+                relationTo: 'articles';
+                value: string | Article;
+              } | null;
+              externalUrl?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'linkList';
+      }
+    | {
+        contacts: (string | User)[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'contactPeople';
+      }
+    | {
+        title: string;
+        description?: string | null;
+        youtubeId: string;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'videoEmbed';
+      }
+    | {
+        media: string | Media;
+        caption?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'media';
+      }
+  )[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-menu".
+ */
+export interface MainMenu {
+  id: string;
+  items: {
+    label: string;
+    onlyLabel?: boolean | null;
+    link?: {
+      isExternal?: boolean | null;
+      internalUrl?:
+        | ({
+            relationTo: 'articles';
+            value: string | Article;
+          } | null)
+        | ({
+            relationTo: 'collection-pages';
+            value: string | CollectionPage;
+          } | null)
+        | ({
+            relationTo: 'news';
+            value: string | News;
+          } | null)
+        | ({
+            relationTo: 'references';
+            value: string | Reference;
+          } | null);
+      externalUrl?: string | null;
+    };
+    children?:
+      | {
+          label: string;
+          link?: {
+            isExternal?: boolean | null;
+            internalUrl?:
+              | ({
+                  relationTo: 'articles';
+                  value: string | Article;
+                } | null)
+              | ({
+                  relationTo: 'collection-pages';
+                  value: string | CollectionPage;
+                } | null)
+              | ({
+                  relationTo: 'news';
+                  value: string | News;
+                } | null)
+              | ({
+                  relationTo: 'references';
+                  value: string | Reference;
+                } | null);
+            externalUrl?: string | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "front-page_select".
+ */
+export interface FrontPageSelect<T extends boolean = true> {
+  content?:
+    | T
+    | {
+        callToAction?:
+          | T
+          | {
+              title?: T;
+              text?: T;
+              buttonText?: T;
+              link?: T;
+              id?: T;
+              blockName?: T;
+            };
+        investorsInfo?:
+          | T
+          | {
+              title?: T;
+              text?: T;
+              buttonText?: T;
+              url?: T;
+              id?: T;
+              blockName?: T;
+            };
+        largeFeaturePostsWrapper?:
+          | T
+          | {
+              posts?:
+                | T
+                | {
+                    largeFeaturePost?:
+                      | T
+                      | {
+                          title?: T;
+                          text?: T;
+                          link?: T;
+                          image?: T;
+                          buttonText?: T;
+                          video?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        smallFeaturePostsWrapper?:
+          | T
+          | {
+              posts?:
+                | T
+                | {
+                    smallFeaturePost?:
+                      | T
+                      | {
+                          title?: T;
+                          text?: T;
+                          link?: T;
+                          image?: T;
+                          id?: T;
+                          blockName?: T;
+                        };
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        linkList?:
+          | T
+          | {
+              links?:
+                | T
+                | {
+                    title?: T;
+                    isExternal?: T;
+                    internalUrl?: T;
+                    externalUrl?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        contactPeople?:
+          | T
+          | {
+              contacts?: T;
+              id?: T;
+              blockName?: T;
+            };
+        videoEmbed?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              youtubeId?: T;
+              id?: T;
+              blockName?: T;
+            };
+        media?:
+          | T
+          | {
+              media?: T;
+              caption?: T;
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "main-menu_select".
+ */
+export interface MainMenuSelect<T extends boolean = true> {
+  items?:
+    | T
+    | {
+        label?: T;
+        onlyLabel?: T;
+        link?:
+          | T
+          | {
+              isExternal?: T;
+              internalUrl?: T;
+              externalUrl?: T;
+            };
+        children?:
+          | T
+          | {
+              label?: T;
+              link?:
+                | T
+                | {
+                    isExternal?: T;
+                    internalUrl?: T;
+                    externalUrl?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

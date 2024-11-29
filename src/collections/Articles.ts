@@ -17,6 +17,13 @@ export const Articles: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     group: "Pages",
+    preview: (doc, { locale }) => {
+      if (doc?.slug) {
+        return `/${locale}/articles/${doc.slug}`;
+      }
+
+      return null;
+    },
   },
   fields: [
     {
@@ -24,33 +31,6 @@ export const Articles: CollectionConfig = {
       type: "text",
       required: true,
       localized: true,
-    },
-    {
-      name: "showFeaturedContent",
-      type: "checkbox",
-      label: "Show Featured Content",
-      defaultValue: false,
-      localized: true,
-    },
-    {
-      name: "featuredContent",
-      type: "blocks",
-      blocks: [
-        mediaBlock,
-        largeFeaturePostsWrapperBlock,
-        smallFeaturePostsWrapperBlock,
-        ctaBlock,
-        investorsInfoBlock,
-        linkListBlock,
-        contactPeopleBlock,
-        videoEmbedBlock,
-      ],
-      localized: true,
-      admin: {
-        condition: (siblingData) => {
-          return siblingData.showFeaturedContent;
-        },
-      },
     },
     {
       name: "content",

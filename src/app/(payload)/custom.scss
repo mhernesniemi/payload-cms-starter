@@ -31,7 +31,7 @@ label.field-label {
 .nav {
   background-color: whitesmoke;
 }
-.cell-title {
+tr td:nth-child(2) {
   font-weight: 500;
 }
 .nav-group__label {
@@ -61,4 +61,7 @@ label.field-label {
   background-color: var(--theme-elevation-600);
   display: inline-block;
   margin-right: 8px;
+}
+.react-select .rs__group-heading {
+  font-weight: 700;
 }

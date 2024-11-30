@@ -1,5 +1,5 @@
 import { CollectionConfig } from "payload";
-import { collectionPageFields } from "./fields/collection-page-fields";
+import { defaultContentFields } from "@/fields/default-content-fields";
 
 export const News: CollectionConfig = {
   slug: "news",
@@ -7,5 +7,5 @@ export const News: CollectionConfig = {
     useAsTitle: "title",
     group: "Pages",
   },
-  fields: collectionPageFields,
+  fields: defaultContentFields,
 };

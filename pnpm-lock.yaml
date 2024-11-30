@@ -21,6 +21,9 @@ importers:
       '@payloadcms/payload-cloud':
         specifier: latest
         version: 3.2.1(@aws-sdk/client-sso-oidc@3.699.0(@aws-sdk/client-sts@3.699.0))(payload@3.2.1(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(typescript@5.7.2))
+      '@payloadcms/plugin-nested-docs':
+        specifier: ^3.2.1
+        version: 3.2.1(payload@3.2.1(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(typescript@5.7.2))
       '@payloadcms/richtext-lexical':
         specifier: latest
         version: 3.2.1(oadgwvl7nh7f5nhvzpom4zcisy)
@@ -942,6 +945,11 @@ packages:
 
   '@payloadcms/payload-cloud@3.2.1':
     resolution: {integrity: sha512-PoHUzKzVPvanKxPe8faiS8hozZmA733Kqou90NDg6XSgpHVMTDfHb6f6fmTkylAv75zDLcCvoYEI18mOkAoMOg==}
+    peerDependencies:
+      payload: 3.2.1
+
+  '@payloadcms/plugin-nested-docs@3.2.1':
+    resolution: {integrity: sha512-sdXeEPtV6tKertesThv5bT+omMsCyxm+rA1uYLpaKCEPBhBOlYoy0o5NE5zurXR81z+O2iMi3aJGfqIVRYTkAw==}
     peerDependencies:
       payload: 3.2.1
 
@@ -5170,6 +5178,10 @@ snapshots:
       - aws-crt
       - debug
       - encoding
+
+  '@payloadcms/plugin-nested-docs@3.2.1(payload@3.2.1(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(typescript@5.7.2))':
+    dependencies:
+      payload: 3.2.1(graphql@16.9.0)(monaco-editor@0.52.0)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(typescript@5.7.2)
 
   '@payloadcms/richtext-lexical@3.2.1(oadgwvl7nh7f5nhvzpom4zcisy)':
     dependencies:

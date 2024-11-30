@@ -119,6 +119,8 @@ export interface Media {
 export interface Article {
   id: string;
   title: string;
+  heroText?: string | null;
+  heroImage?: (string | null) | Media;
   content: {
     root: {
       type: string;
@@ -134,10 +136,9 @@ export interface Article {
     };
     [k: string]: unknown;
   };
-  featuredImage?: (string | null) | Media;
+  slug: string;
   author: string | User;
   publishedDate: string;
-  slug: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -374,11 +375,12 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ArticlesSelect<T extends boolean = true> {
   title?: T;
+  heroText?: T;
+  heroImage?: T;
   content?: T;
-  featuredImage?: T;
+  slug?: T;
   author?: T;
   publishedDate?: T;
-  slug?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -489,36 +491,22 @@ export interface FrontPage {
     | {
         title: string;
         text?: string | null;
-        buttonText: string;
-        link: string;
+        linkText: string;
+        linkUrl: string;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'callToAction';
+        blockType: 'cta';
       }
     | {
         title: string;
         text?: string | null;
-        buttonText: string;
-        url: string;
+        link?: string | null;
+        image: string | Media;
+        buttonText?: string | null;
+        video?: string | null;
         id?: string | null;
         blockName?: string | null;
-        blockType: 'investorsInfo';
-      }
-    | {
-        posts: {
-          title: string;
-          text?: string | null;
-          link?: string | null;
-          image: string | Media;
-          buttonText?: string | null;
-          video?: string | null;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'largeFeaturePost';
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'largeFeaturePostsWrapper';
+        blockType: 'largeFeaturePost';
       }
     | {
         posts: {
@@ -572,6 +560,15 @@ export interface FrontPage {
         blockName?: string | null;
         blockType: 'media';
       }
+    | {
+        quote: string;
+        author?: string | null;
+        title?: string | null;
+        image?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'quote';
+      }
   )[];
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -586,8 +583,8 @@ export interface MainMenu {
     label: string;
     onlyLabel?: boolean | null;
     link?: {
-      isExternal?: boolean | null;
-      internalUrl?:
+      type: 'internal' | 'external';
+      internalLink?:
         | ({
             relationTo: 'articles';
             value: string | Article;
@@ -604,14 +601,14 @@ export interface MainMenu {
             relationTo: 'references';
             value: string | Reference;
           } | null);
-      externalUrl?: string | null;
+      externalLink?: string | null;
     };
     children?:
       | {
           label: string;
-          link?: {
-            isExternal?: boolean | null;
-            internalUrl?:
+          link: {
+            type: 'internal' | 'external';
+            internalLink?:
               | ({
                   relationTo: 'articles';
                   value: string | Article;
@@ -628,7 +625,7 @@ export interface MainMenu {
                   relationTo: 'references';
                   value: string | Reference;
                 } | null);
-            externalUrl?: string | null;
+            externalLink?: string | null;
           };
           id?: string | null;
         }[]
@@ -646,45 +643,25 @@ export interface FrontPageSelect<T extends boolean = true> {
   content?:
     | T
     | {
-        callToAction?:
+        cta?:
           | T
           | {
               title?: T;
               text?: T;
-              buttonText?: T;
+              linkText?: T;
+              linkUrl?: T;
+              id?: T;
+              blockName?: T;
+            };
+        largeFeaturePost?:
+          | T
+          | {
+              title?: T;
+              text?: T;
               link?: T;
-              id?: T;
-              blockName?: T;
-            };
-        investorsInfo?:
-          | T
-          | {
-              title?: T;
-              text?: T;
+              image?: T;
               buttonText?: T;
-              url?: T;
-              id?: T;
-              blockName?: T;
-            };
-        largeFeaturePostsWrapper?:
-          | T
-          | {
-              posts?:
-                | T
-                | {
-                    largeFeaturePost?:
-                      | T
-                      | {
-                          title?: T;
-                          text?: T;
-                          link?: T;
-                          image?: T;
-                          buttonText?: T;
-                          video?: T;
-                          id?: T;
-                          blockName?: T;
-                        };
-                  };
+              video?: T;
               id?: T;
               blockName?: T;
             };
@@ -747,6 +724,16 @@ export interface FrontPageSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        quote?:
+          | T
+          | {
+              quote?: T;
+              author?: T;
+              title?: T;
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;
@@ -765,9 +752,9 @@ export interface MainMenuSelect<T extends boolean = true> {
         link?:
           | T
           | {
-              isExternal?: T;
-              internalUrl?: T;
-              externalUrl?: T;
+              type?: T;
+              internalLink?: T;
+              externalLink?: T;
             };
         children?:
           | T
@@ -776,9 +763,9 @@ export interface MainMenuSelect<T extends boolean = true> {
               link?:
                 | T
                 | {
-                    isExternal?: T;
-                    internalUrl?: T;
-                    externalUrl?: T;
+                    type?: T;
+                    internalLink?: T;
+                    externalLink?: T;
                   };
               id?: T;
             };

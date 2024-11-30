@@ -36,18 +36,6 @@ export const largeFeaturePostBlock: Block = {
   ],
 };
 
-export const largeFeaturePostsWrapperBlock: Block = {
-  slug: "largeFeaturePostsWrapper",
-  fields: [
-    {
-      name: "posts",
-      type: "blocks",
-      blocks: [largeFeaturePostBlock],
-      required: true,
-    },
-  ],
-};
-
 export const smallFeaturePostBlock: Block = {
   slug: "smallFeaturePost",
   fields: [
@@ -75,6 +63,10 @@ export const smallFeaturePostBlock: Block = {
 
 export const smallFeaturePostsWrapperBlock: Block = {
   slug: "smallFeaturePostsWrapper",
+  labels: {
+    singular: "Small Featured Posts",
+    plural: "Small Featured Posts",
+  },
   fields: [
     {
       name: "posts",

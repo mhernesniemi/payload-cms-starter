@@ -25,10 +25,10 @@ export default async function ArticlesPage({ params }: { params: Params }) {
         {articles.map((article) => (
           <Link href={`/articles/${article.slug}`} key={article.id}>
             <article className="group flex gap-4 rounded-lg border border-gray-200 bg-slate-50 p-3">
-              {typeof article.featuredImage === "object" && (
+              {typeof article.heroImage === "object" && (
                 <Image
-                  src={article.featuredImage?.url ?? ""}
-                  alt={article.featuredImage?.alt ?? ""}
+                  src={article.heroImage?.url ?? ""}
+                  alt={article.heroImage?.alt ?? ""}
                   width={192}
                   height={192}
                   className="size-48 flex-shrink-0 rounded-lg object-cover"

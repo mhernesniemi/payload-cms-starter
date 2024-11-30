@@ -3,16 +3,16 @@ import { HeadingFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
 import { BlocksFeature } from "@payloadcms/richtext-lexical";
 import {
   mediaBlock,
-  largeFeaturePostsWrapperBlock,
+  largeFeaturePostBlock,
   smallFeaturePostsWrapperBlock,
   ctaBlock,
-  investorsInfoBlock,
   linkListBlock,
   contactPeopleBlock,
   videoEmbedBlock,
+  quoteBlock,
 } from "@/blocks";
 
-export const collectionPageFields: Field[] = [
+export const defaultContentFields: Field[] = [
   {
     name: "title",
     type: "text",
@@ -43,13 +43,13 @@ export const collectionPageFields: Field[] = [
           BlocksFeature({
             blocks: [
               mediaBlock,
-              largeFeaturePostsWrapperBlock,
+              largeFeaturePostBlock,
               smallFeaturePostsWrapperBlock,
               ctaBlock,
-              investorsInfoBlock,
               linkListBlock,
               contactPeopleBlock,
               videoEmbedBlock,
+              quoteBlock,
             ],
           }),
         ];

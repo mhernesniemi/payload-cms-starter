@@ -1,12 +1,12 @@
 import {
-  largeFeaturePostsWrapperBlock,
+  largeFeaturePostBlock,
   smallFeaturePostsWrapperBlock,
   ctaBlock,
   mediaBlock,
   videoEmbedBlock,
-  investorsInfoBlock,
   linkListBlock,
   contactPeopleBlock,
+  quoteBlock,
 } from "@/blocks";
 import { GlobalConfig } from "payload";
 
@@ -25,13 +25,13 @@ export const FrontPage: GlobalConfig = {
       required: true,
       blocks: [
         ctaBlock,
-        investorsInfoBlock,
-        largeFeaturePostsWrapperBlock,
+        largeFeaturePostBlock,
         smallFeaturePostsWrapperBlock,
         linkListBlock,
         contactPeopleBlock,
         videoEmbedBlock,
         mediaBlock,
+        quoteBlock,
       ],
     },
   ],

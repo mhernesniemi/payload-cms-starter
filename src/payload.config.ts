@@ -17,6 +17,7 @@ import { FrontPage } from "./globals/FrontPage";
 import { MainMenu } from "./globals/MainMenu";
 import { Categories } from "./collections/Categories";
 import { Contacts } from "./collections/Contacts";
+// import { nestedDocsPlugin } from "@payloadcms/plugin-nested-docs";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -47,6 +48,10 @@ export default buildConfig({
   sharp,
   plugins: [
     payloadCloudPlugin(),
-    // storage-adapter-placeholder
+    // nestedDocsPlugin({
+    //   collections: ["articles"],
+    //   generateLabel: (_, doc) => doc.title,
+    //   generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ""),
+    // }),
   ],
 });

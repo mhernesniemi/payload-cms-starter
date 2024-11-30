@@ -1,5 +1,5 @@
 import { CollectionConfig } from "payload";
-import { collectionPageFields } from "./fields/collection-page-fields";
+import { defaultContentFields } from "@/fields/default-content-fields";
 
 export const Reference: CollectionConfig = {
   slug: "references",
@@ -7,5 +7,5 @@ export const Reference: CollectionConfig = {
     useAsTitle: "title",
     group: "Pages",
   },
-  fields: collectionPageFields,
+  fields: defaultContentFields,
 };

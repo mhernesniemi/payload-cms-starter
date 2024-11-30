@@ -44,10 +44,10 @@ export default async function ArticlePage({ params }: { params: Params }) {
   return (
     <main className="container mx-auto px-4 py-8">
       <article>
-        {typeof article.featuredImage === "object" && (
+        {typeof article.heroImage === "object" && (
           <Image
-            src={article.featuredImage?.url ?? ""}
-            alt={article.featuredImage?.alt ?? ""}
+            src={article.heroImage?.url ?? ""}
+            alt={article.heroImage?.alt ?? ""}
             width={1920}
             height={1080}
             className="mb-8 h-[400px] w-full rounded-lg object-cover"

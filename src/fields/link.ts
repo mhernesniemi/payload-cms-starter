@@ -2,25 +2,33 @@ import { Field } from "payload";
 
 export const linkFields: Field[] = [
   {
-    name: "isExternal",
-    type: "checkbox",
-    label: "External link",
+    name: "type",
+    type: "radio",
+    required: true,
+    options: [
+      {
+        label: "Internal",
+        value: "internal",
+      },
+      {
+        label: "External",
+        value: "external",
+      },
+    ],
   },
   {
-    name: "internalUrl",
+    name: "internalLink",
     type: "relationship",
     relationTo: ["articles", "collection-pages", "news", "references"],
-    required: true,
     admin: {
-      condition: (_, siblingData) => !siblingData.isExternal,
+      condition: (data: any, { type }: { type?: string } = {}) => type === "internal",
     },
   },
   {
-    name: "externalUrl",
+    name: "externalLink",
     type: "text",
-    required: true,
     admin: {
-      condition: (_, siblingData) => siblingData.isExternal,
+      condition: (data: any, { type }: { type?: string } = {}) => type === "external",
     },
   },
 ];

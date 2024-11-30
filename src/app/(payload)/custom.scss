@@ -65,3 +65,12 @@ tr td:nth-child(2) {
 .react-select .rs__group-heading {
   font-weight: 700;
 }
+.nav-group__indicator svg .stroke {
+  stroke: var(--theme-elevation-400);
+}
+.nav-group__toggle:hover svg .stroke {
+  stroke: var(--theme-elevation-800);
+}
+.nav-group__toggle {
+  align-items: center;
+}

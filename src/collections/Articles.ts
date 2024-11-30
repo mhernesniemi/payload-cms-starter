@@ -1,16 +1,5 @@
 import { CollectionConfig } from "payload";
-import {
-  mediaBlock,
-  largeFeaturePostsWrapperBlock,
-  smallFeaturePostsWrapperBlock,
-  ctaBlock,
-  investorsInfoBlock,
-  linkListBlock,
-  contactPeopleBlock,
-  videoEmbedBlock,
-} from "../blocks";
-import { HeadingFeature, lexicalEditor } from "@payloadcms/richtext-lexical";
-import { BlocksFeature } from "@payloadcms/richtext-lexical";
+import { defaultContentFields } from "@/fields/default-content-fields";
 
 export const Articles: CollectionConfig = {
   slug: "articles",
@@ -26,47 +15,7 @@ export const Articles: CollectionConfig = {
     },
   },
   fields: [
-    {
-      name: "title",
-      type: "text",
-      required: true,
-      localized: true,
-    },
-    {
-      name: "content",
-      type: "richText",
-      required: true,
-      localized: true,
-      editor: lexicalEditor({
-        features: ({ defaultFeatures }) => {
-          return [
-            ...defaultFeatures,
-            HeadingFeature({ enabledHeadingSizes: ["h2", "h3"] }),
-            BlocksFeature({
-              blocks: [
-                mediaBlock,
-                largeFeaturePostsWrapperBlock,
-                smallFeaturePostsWrapperBlock,
-                ctaBlock,
-                investorsInfoBlock,
-                linkListBlock,
-                contactPeopleBlock,
-                videoEmbedBlock,
-              ],
-            }),
-          ];
-        },
-      }),
-    },
-    {
-      name: "featuredImage",
-      type: "upload",
-      relationTo: "media",
-      localized: true,
-      admin: {
-        description: "This image will be used as the featured image for the article.",
-      },
-    },
+    ...defaultContentFields,
     {
       name: "author",
       type: "relationship",
@@ -82,15 +31,9 @@ export const Articles: CollectionConfig = {
       required: true,
       admin: {
         position: "sidebar",
-      },
-    },
-    {
-      name: "slug",
-      type: "text",
-      required: true,
-      unique: true,
-      admin: {
-        position: "sidebar",
+        date: {
+          pickerAppearance: "dayOnly",
+        },
       },
     },
   ],

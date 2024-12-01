@@ -1,5 +1,6 @@
 import { CollectionConfig } from "payload";
 import { defaultContentFields } from "@/fields/default-content-fields";
+import { afterChangeHook, afterDeleteHook } from "./hooks/indexToElastic";
 
 export const Articles: CollectionConfig = {
   slug: "articles",
@@ -37,4 +38,8 @@ export const Articles: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterChange: [afterChangeHook],
+    afterDelete: [afterDeleteHook],
+  },
 };

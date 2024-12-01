@@ -15,11 +15,15 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
+    "@elastic/elasticsearch": "7.17.0",
     "@payloadcms/db-mongodb": "latest",
     "@payloadcms/next": "latest",
     "@payloadcms/payload-cloud": "latest",
     "@payloadcms/plugin-nested-docs": "^3.2.1",
     "@payloadcms/richtext-lexical": "latest",
+    "@searchkit/api": "^4.13.0",
+    "@searchkit/instantsearch-client": "^4.14.1",
+    "@types/react-instantsearch-dom": "^6.12.8",
     "cross-env": "^7.0.3",
     "graphql": "^16.8.1",
     "next": "15.0.0",
@@ -27,6 +31,9 @@
     "payload": "latest",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020",
+    "react-instantsearch-dom": "^6.40.4",
+    "react-instantsearch-nextjs": "^0.3.18",
+    "searchkit": "^4.13.2",
     "sharp": "0.32.6"
   },
   "devDependencies": {

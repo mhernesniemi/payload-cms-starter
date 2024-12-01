@@ -1,7 +1,6 @@
 import configPromise from "@payload-config";
 import { getPayload } from "payload";
-import { Link } from "@/i18n/routing";
-import Image from "next/image";
+import FrontPageTemplate from "@/app/templates/front-page-template";
 
 type Params = Promise<{ locale: "fi" | "en" }>;
 
@@ -18,9 +17,5 @@ export default async function Home({ params }: { params: Params }) {
     locale: locale,
   });
 
-  return (
-    <main className="container mx-auto px-4 py-16 xl:px-0">
-      <h1 className="mb-8 text-4xl font-bold">front page</h1>
-    </main>
-  );
+  return <FrontPageTemplate />;
 }

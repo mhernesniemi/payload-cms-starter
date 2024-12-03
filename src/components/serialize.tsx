@@ -1,10 +1,21 @@
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
+import { DefaultNodeTypes, SerializedBlockNode } from "@payloadcms/richtext-lexical";
 import { useTranslations } from "next-intl";
+import type {
+  ContactPeopleBlock,
+  CTABlock,
+  LinkListBlock,
+  MediaBlock,
+  QuoteBlock,
+  VideoEmbedBlock,
+} from "@/payload-types";
 
 export type NodeTypes =
   | DefaultNodeTypes
-  | SerializedBlockNode<CTABlockProps | MediaBlockProps | BannerBlockProps | CodeBlockProps>;
+  | SerializedBlockNode<
+      CTABlock | MediaBlock | QuoteBlock | VideoEmbedBlock | LinkListBlock | ContactPeopleBlock
+    >;
 
 type Props = {
   nodes: NodeTypes[];

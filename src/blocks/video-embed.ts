@@ -18,4 +18,5 @@ export const videoEmbedBlock: Block = {
       required: true,
     },
   ],
+  interfaceName: "VideoEmbedBlock",
 };

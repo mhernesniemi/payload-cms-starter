@@ -11,4 +11,5 @@ export const contactPeopleBlock: Block = {
       required: true,
     },
   ],
+  interfaceName: "ContactPeopleBlock",
 };

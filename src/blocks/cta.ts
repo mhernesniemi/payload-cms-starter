@@ -32,4 +32,5 @@ export const ctaBlock: Block = {
       required: true,
     },
   ],
+  interfaceName: "CTABlock",
 };

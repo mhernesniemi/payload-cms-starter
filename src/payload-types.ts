@@ -488,90 +488,130 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
 export interface FrontPage {
   id: string;
   content: (
-    | {
-        title: string;
-        text?: string | null;
-        linkText: string;
-        linkUrl: string;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'cta';
-      }
-    | {
-        title: string;
-        text?: string | null;
-        link?: string | null;
-        image: string | Media;
-        buttonText?: string | null;
-        video?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'largeFeaturePost';
-      }
-    | {
-        posts: {
-          title: string;
-          text?: string | null;
-          link?: string | null;
-          image: string | Media;
-          id?: string | null;
-          blockName?: string | null;
-          blockType: 'smallFeaturePost';
-        }[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'smallFeaturePostsWrapper';
-      }
-    | {
-        links?:
-          | {
-              title: string;
-              isExternal?: boolean | null;
-              internalUrl?: {
-                relationTo: 'articles';
-                value: string | Article;
-              } | null;
-              externalUrl?: string | null;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'linkList';
-      }
-    | {
-        contacts: (string | User)[];
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'contactPeople';
-      }
-    | {
-        title: string;
-        description?: string | null;
-        youtubeId: string;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'videoEmbed';
-      }
-    | {
-        media: string | Media;
-        caption?: string | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'media';
-      }
-    | {
-        quote: string;
-        author?: string | null;
-        title?: string | null;
-        image?: (string | null) | Media;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'quote';
-      }
+    | CTABlock
+    | LargeFeaturePostBlock
+    | SmallFeaturePostsWrapperBlock
+    | LinkListBlock
+    | ContactPeopleBlock
+    | VideoEmbedBlock
+    | MediaBlock
+    | QuoteBlock
   )[];
   updatedAt?: string | null;
   createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CTABlock".
+ */
+export interface CTABlock {
+  title: string;
+  text?: string | null;
+  linkText: string;
+  linkUrl: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LargeFeaturePostBlock".
+ */
+export interface LargeFeaturePostBlock {
+  title: string;
+  text?: string | null;
+  link?: string | null;
+  image: string | Media;
+  buttonText?: string | null;
+  video?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'largeFeaturePost';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SmallFeaturePostsWrapperBlock".
+ */
+export interface SmallFeaturePostsWrapperBlock {
+  posts: {
+    title: string;
+    text?: string | null;
+    link?: string | null;
+    image: string | Media;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'smallFeaturePost';
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'smallFeaturePostsWrapper';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "LinkListBlock".
+ */
+export interface LinkListBlock {
+  links?:
+    | {
+        title: string;
+        isExternal?: boolean | null;
+        internalUrl?: {
+          relationTo: 'articles';
+          value: string | Article;
+        } | null;
+        externalUrl?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'linkList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactPeopleBlock".
+ */
+export interface ContactPeopleBlock {
+  contacts: (string | User)[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactPeople';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "VideoEmbedBlock".
+ */
+export interface VideoEmbedBlock {
+  title: string;
+  description?: string | null;
+  youtubeId: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'videoEmbed';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MediaBlock".
+ */
+export interface MediaBlock {
+  media: string | Media;
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'media';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "QuoteBlock".
+ */
+export interface QuoteBlock {
+  quote: string;
+  author?: string | null;
+  title?: string | null;
+  image?: (string | null) | Media;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'quote';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

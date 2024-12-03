@@ -34,6 +34,7 @@ export const largeFeaturePostBlock: Block = {
       },
     },
   ],
+  interfaceName: "LargeFeaturePostBlock",
 };
 
 export const smallFeaturePostBlock: Block = {
@@ -75,4 +76,5 @@ export const smallFeaturePostsWrapperBlock: Block = {
       required: true,
     },
   ],
+  interfaceName: "SmallFeaturePostsWrapperBlock",
 };

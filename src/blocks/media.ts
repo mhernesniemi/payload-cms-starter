@@ -14,4 +14,5 @@ export const mediaBlock: Block = {
       type: "text",
     },
   ],
+  interfaceName: "MediaBlock",
 };

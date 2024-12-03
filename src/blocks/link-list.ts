@@ -37,4 +37,5 @@ export const linkListBlock: Block = {
       ],
     },
   ],
+  interfaceName: "LinkListBlock",
 };

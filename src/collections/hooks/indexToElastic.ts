@@ -3,7 +3,6 @@ import { elasticClient } from "@/lib/elastic-client";
 
 const createIndexIfNotExists = async (indexName: string) => {
   try {
-    console.log("indexName", indexName);
     const exists = await elasticClient.indices.exists({ index: indexName });
     if (!exists) {
       await elasticClient.indices.create({
@@ -34,9 +33,6 @@ export const afterChangeHook: CollectionAfterChangeHook = async ({
   operation,
   collection,
 }) => {
-  console.log("doc", doc);
-  console.log("operation", operation);
-  console.log("collection", collection);
   try {
     if (operation === "create" || operation === "update") {
       const indexCreated = await createIndexIfNotExists(collection.slug);

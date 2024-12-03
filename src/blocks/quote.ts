@@ -31,4 +31,5 @@ export const quoteBlock: Block = {
       },
     },
   ],
+  interfaceName: "QuoteBlock",
 };

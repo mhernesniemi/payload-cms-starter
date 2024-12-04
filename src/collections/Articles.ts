@@ -38,6 +38,9 @@ export const Articles: CollectionConfig = {
       },
     },
   ],
+  versions: {
+    drafts: true,
+  },
   hooks: {
     afterChange: [afterChangeHook],
     afterDelete: [afterDeleteHook],

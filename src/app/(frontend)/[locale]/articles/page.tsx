@@ -2,7 +2,6 @@ import configPromise from "@payload-config";
 import { getPayload } from "payload";
 import { Link } from "@/i18n/routing";
 import Image from "next/image";
-
 type Params = Promise<{ locale: "fi" | "en" }>;
 
 export default async function ArticlesPage({ params }: { params: Params }) {

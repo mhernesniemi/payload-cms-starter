@@ -3,6 +3,8 @@ import { getPayload } from "payload";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
+import { serializeBlocks } from "@/components/Serialize";
+import { NodeTypes } from "@/components/Serialize";
 
 type Params = Promise<{ locale: "fi" | "en"; slug: string }>;
 
@@ -61,7 +63,11 @@ export default async function ArticlePage({ params }: { params: Params }) {
           <span>•</span>
           <span>{typeof article.author === "object" && article.author.email}</span>
         </div>
-        {/* <div className="rich-text">{article.content}</div> */}
+        <div className="mt-4">
+          {serializeBlocks({
+            nodes: article.content?.root?.children as NodeTypes[],
+          })}
+        </div>
       </article>
     </main>
   );

@@ -1,3 +1,4 @@
+import { linkField } from "@/fields/link";
 import { Block } from "payload";
 
 export const ctaBlock: Block = {
@@ -18,19 +19,7 @@ export const ctaBlock: Block = {
       type: "textarea",
       localized: true,
     },
-    {
-      name: "linkText",
-      label: "Link text",
-      type: "text",
-      required: true,
-      localized: true,
-    },
-    {
-      name: "linkUrl",
-      label: "Link URL",
-      type: "text",
-      required: true,
-    },
+    ...linkField,
   ],
   interfaceName: "CTABlock",
 };

@@ -141,6 +141,7 @@ export interface Article {
   publishedDate: string;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -383,6 +384,7 @@ export interface ArticlesSelect<T extends boolean = true> {
   publishedDate?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -507,8 +509,6 @@ export interface FrontPage {
 export interface CTABlock {
   title: string;
   text?: string | null;
-  linkText: string;
-  linkUrl: string;
   id?: string | null;
   blockName?: string | null;
   blockType: 'cta';
@@ -555,10 +555,23 @@ export interface LinkListBlock {
     | {
         title: string;
         isExternal?: boolean | null;
-        internalUrl?: {
-          relationTo: 'articles';
-          value: string | Article;
-        } | null;
+        internalUrl?:
+          | ({
+              relationTo: 'articles';
+              value: string | Article;
+            } | null)
+          | ({
+              relationTo: 'collection-pages';
+              value: string | CollectionPage;
+            } | null)
+          | ({
+              relationTo: 'news';
+              value: string | News;
+            } | null)
+          | ({
+              relationTo: 'references';
+              value: string | Reference;
+            } | null);
         externalUrl?: string | null;
         id?: string | null;
       }[]
@@ -623,8 +636,9 @@ export interface MainMenu {
     label: string;
     onlyLabel?: boolean | null;
     link?: {
-      type: 'internal' | 'external';
-      internalLink?:
+      title: string;
+      isExternal?: boolean | null;
+      internalUrl?:
         | ({
             relationTo: 'articles';
             value: string | Article;
@@ -641,14 +655,15 @@ export interface MainMenu {
             relationTo: 'references';
             value: string | Reference;
           } | null);
-      externalLink?: string | null;
+      externalUrl?: string | null;
     };
     children?:
       | {
           label: string;
           link: {
-            type: 'internal' | 'external';
-            internalLink?:
+            title: string;
+            isExternal?: boolean | null;
+            internalUrl?:
               | ({
                   relationTo: 'articles';
                   value: string | Article;
@@ -665,7 +680,7 @@ export interface MainMenu {
                   relationTo: 'references';
                   value: string | Reference;
                 } | null);
-            externalLink?: string | null;
+            externalUrl?: string | null;
           };
           id?: string | null;
         }[]
@@ -688,8 +703,6 @@ export interface FrontPageSelect<T extends boolean = true> {
           | {
               title?: T;
               text?: T;
-              linkText?: T;
-              linkUrl?: T;
               id?: T;
               blockName?: T;
             };
@@ -792,9 +805,10 @@ export interface MainMenuSelect<T extends boolean = true> {
         link?:
           | T
           | {
-              type?: T;
-              internalLink?: T;
-              externalLink?: T;
+              title?: T;
+              isExternal?: T;
+              internalUrl?: T;
+              externalUrl?: T;
             };
         children?:
           | T
@@ -803,9 +817,10 @@ export interface MainMenuSelect<T extends boolean = true> {
               link?:
                 | T
                 | {
-                    type?: T;
-                    internalLink?: T;
-                    externalLink?: T;
+                    title?: T;
+                    isExternal?: T;
+                    internalUrl?: T;
+                    externalUrl?: T;
                   };
               id?: T;
             };

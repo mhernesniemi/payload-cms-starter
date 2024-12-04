@@ -1,4 +1,4 @@
-import { linkFields } from "@/fields/link";
+import { linkField } from "@/fields/link";
 import { GlobalConfig } from "payload";
 
 export const MainMenu: GlobalConfig = {
@@ -30,7 +30,7 @@ export const MainMenu: GlobalConfig = {
         {
           name: "link",
           type: "group",
-          fields: linkFields,
+          fields: linkField,
           admin: {
             condition: (_, siblingData) => !siblingData.onlyLabel,
           },
@@ -48,7 +48,7 @@ export const MainMenu: GlobalConfig = {
             {
               name: "link",
               type: "group",
-              fields: linkFields,
+              fields: linkField,
             },
           ],
         },

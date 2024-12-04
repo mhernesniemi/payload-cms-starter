@@ -1,3 +1,4 @@
+import { linkField } from "@/fields/link";
 import { Block } from "payload";
 
 export const linkListBlock: Block = {
@@ -6,35 +7,7 @@ export const linkListBlock: Block = {
     {
       name: "links",
       type: "array",
-      fields: [
-        {
-          name: "title",
-          type: "text",
-          required: true,
-        },
-        {
-          name: "isExternal",
-          type: "checkbox",
-          label: "External link",
-        },
-        {
-          name: "internalUrl",
-          type: "relationship",
-          relationTo: ["articles"],
-          required: true,
-          admin: {
-            condition: (_, siblingData) => !siblingData.isExternal,
-          },
-        },
-        {
-          name: "externalUrl",
-          type: "text",
-          required: true,
-          admin: {
-            condition: (_, siblingData) => siblingData.isExternal,
-          },
-        },
-      ],
+      fields: [...linkField],
     },
   ],
   interfaceName: "LinkListBlock",

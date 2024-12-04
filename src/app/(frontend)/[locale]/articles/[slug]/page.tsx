@@ -3,8 +3,7 @@ import { getPayload } from "payload";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Image from "next/image";
-import { serializeBlocks } from "@/components/Serialize";
-import { NodeTypes } from "@/components/Serialize";
+import { NodeTypes, serializeBlocks } from "@/components/serialize";
 
 type Params = Promise<{ locale: "fi" | "en"; slug: string }>;
 

@@ -1,4 +1,4 @@
-export { mediaBlock } from "./Media";
+export { mediaBlock } from "./media"
 export {
   largeFeaturePostBlock,
   smallFeaturePostBlock,
@@ -8,4 +8,4 @@ export { ctaBlock } from "./cta";
 export { linkListBlock } from "./link-list";
 export { contactPeopleBlock } from "./contact-people";
 export { videoEmbedBlock } from "./video-embed";
-export { quoteBlock } from "./Quote";
+export { quoteBlock } from "./quote";
